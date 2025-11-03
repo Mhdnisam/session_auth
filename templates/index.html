@@ -4,12 +4,72 @@
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Welcome</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <style>
+        body {
+            background: #f2f6ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: "Poppins", sans-serif;
+        }
+
+        .home-box {
+            background: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 360px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        p {
+            color: #555;
+            font-size: 15px;
+            margin-bottom: 25px;
+        }
+
+        a.logout-btn {
+            background: #ff4d4d;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: 0.3s;
+            font-weight: 500;
+        }
+
+        a.logout-btn:hover {
+            background: #cc0000;
+        }
+
+        .google-logo {
+            width: 80px;
+            margin-bottom: 10px;
+        }
+
+        .status {
+            color: green;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
 </head>
 <body>
-    <P>Hello World</P>
-    <br><br>
+    <div class="home-box">
+        <img src="https://www.gstatic.com/images/branding/product/1x/googleg_64dp.png" alt="Google Logo" class="google-logo">
+        <h2>Welcome, {{ request.user.first_name|default:request.user.username }}!</h2>
+        <p>You have successfully logged in using Google authentication.</p>
+        <p class="status">✅ Google Allauth is working properly!</p>
 
-    <a href="{% url 'logout' %}">Logout</a>
+        <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+    </div>
 </body>
 </html>

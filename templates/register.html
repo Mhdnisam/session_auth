@@ -1,67 +1,42 @@
 <!DOCTYPE html>
-<!-- Coding By CodingNepal - youtube.com/codingnepal -->
-<html lang="en" dir="ltr">
+<html lang="en">
   <head>
     {% load static %}
+    {% load socialaccount %}
     <meta charset="utf-8">
     <title>Register</title>
     <link rel="stylesheet" href="{% static 'style.css' %}">
   </head>
   <body>
-    <div class="center">
-      <h1>Register</h1>
+    <div class="container">
+      <h2>Register</h2>
 
       {% if messages %}
-          {% for message in messages %}
-              {% if message.tags == 'error' %}
-                  <center><h4 style="color: firebrick;">{{message}}</h4></center>
-              {% else %}
-                  <center><h4 style="color: dodgerblue;">{{message}}</h4></center>
-              {% endif %}
-          {% endfor %}
+        {% for message in messages %}
+          <p class="msg {{ message.tags }}">{{ message }}</p>
+        {% endfor %}
       {% endif %}
 
       <form method="POST">
-
         {% csrf_token %}
-
-        <div class="txt_field">
-            <input type="text" required name="first_name">
-            <span></span>
-            <label>First Name</label>
-          </div>
-
-          <div class="txt_field">
-            <input type="text" required name="last_name">
-            <span></span>
-            <label>Last Name</label>
-          </div>
-
-        <div class="txt_field">
-          <input type="text" required name="username">
-          <span></span>
-          <label>Username</label>
-        </div>
-
-        <div class="txt_field">
-            <input type="email" required name="email">
-            <span></span>
-            <label>Email</label>
-          </div>
-
-        <div class="txt_field">
-          <input type="password" required name="password">
-          <span></span>
-          <label>Password</label>
-        </div>
-
-        <!-- <div class="pass">Forgot Password?</div> -->
+        <input type="text" name="first_name" placeholder="First Name" required>
+        <input type="text" name="last_name" placeholder="Last Name" required>
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
         <input type="submit" value="Register">
-        <div class="signup_link">
+
+        <div class="divider">or</div>
+
+        <a href="{% provider_login_url 'google' %}" class="google-btn">
+          <img src="https://developers.google.com/identity/images/g-logo.png" alt="">
+          Continue with Google
+        </a>
+
+        <p class="bottom-text">
           Already have an account? <a href="{% url 'login' %}">Login</a>
-        </div>
+        </p>
       </form>
     </div>
-
   </body>
 </html>
